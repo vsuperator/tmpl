@@ -1,0 +1,16 @@
+{
+  "name": "name-project",
+  "version": "0.1.0",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-sass": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-rename": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-connect": "latest",
+    "gulp-uglify": "latest",
+    "gulp-jade": "latest",
+    "gulp-plumber": "latest",
+    "gulp-compass": "latest"
+  }
+}
