@@ -1,78 +1,42 @@
 "use strict";
 
 var gulp = require('gulp'),
-        sass = require('gulp-sass'),
-        minCSS = require('gulp-minify-css'),
-        rename = require('gulp-rename'),
-        prefix = require('gulp-autoprefixer'),
-        connect = require("gulp-connect"),
-        uglify = require("gulp-uglify"),
-        jade = require("gulp-jade"),
-        plumber = require("gulp-plumber"),
-        compass = require("gulp-compass");
+    plumber = require("gulp-plumber"),
+    jade = require("gulp-jade"),
+    compass = require("gulp-compass");
 
-
-//---- connect
-gulp.task('connect', function() {
-    connect.server({
-        root: 'public/',
-        livereload: true
-    });
-})
-
-
-// Compile sass to css
-gulp.task('css', function() {
-    gulp.src('src/sass/*.scss')
-        .pipe(plumber())
-        // .pipe(sass())
-        .pipe(compass({
-          sass: 'src/sass/',
-          css: 'src/sass/',
-          style: 'expanded'
-         }))
-        .pipe(prefix({
-            browsers: ['last 3 version', 'ie 8', 'ie 9', 'Opera 12.1'],
-        }))
-        /*.pipe(minCSS())
-        .pipe(rename({
-            suffix: '.min'
-        }))*/
-        .pipe(gulp.dest('public/css/'))
-        .pipe(connect.reload());
-});
-
-
-// Compile Jade to html
-gulp.task('html', function() {
-    gulp.src('src/jade/*.jade')
+// Convert jade to html and save index.html to public folder
+gulp.task('jade', function () {
+    gulp.src('_dev/_makeups/*.jade')
         .pipe(plumber())
         .pipe(jade({
-            pretty: true
-            }))
-        .pipe(gulp.dest('public/'))
-        .pipe(connect.reload());
-});
+            pretty : true,
+            indent_size: 4
+        }))
+        .pipe(gulp.dest('public'))
+})
 
+// Convert main.scss to main.css when we have a changes
+// in any files in styles folder
 
-// Compile js to minify.js
-gulp.task('js', function() {
-    gulp.src('src/js/*.js')
+gulp.task('css', function() {
+    gulp.src('_dev/_styles/*.scss')
         .pipe(plumber())
-/*        .pipe(uglify())
-        .pipe(rename({
-            suffix: '.min'
-        }))*/
-        .pipe(gulp.dest('public/js'))
-        .pipe(connect.reload());
+        .pipe(compass({
+            sass: '_dev/_styles/',
+            css: '_dev/_styles/',
+            style: 'expanded'
+         }))
+        // .pipe(prefix({
+        //     browsers: ['last 3 version', 'ie 8', 'ie 9', 'Opera 12.1'],
+        // }))
+        .pipe(gulp.dest('public/css/'))
 });
 
-// Enable watchers
+//----watch
 gulp.task('watch', function() {
+    gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
+    gulp.watch('_dev/_styles/**/*.scss', ['css']);
+})
 
-    gulp.watch('src/sass/**/*.scss', ['css']),
-    gulp.watch('src/jade/**/*.jade', ['html']),
-    gulp.watch('src/js/*.js', ['js']);
-});
-
-gulp.task('default', ['connect', 'html', 'css', 'js', 'watch']);
+gulp.task('default', ['watch'])

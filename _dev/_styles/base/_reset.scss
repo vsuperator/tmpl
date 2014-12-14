@@ -1,67 +1,75 @@
-/******************************
-    All The Base styles
-*******************************/
-/* Reset **********************/
-html {
+// ------------------------- //
+// Reset styles ------------ //
+// ------------------------- //
+
+html{
   line-height: 1;
 }
 
 body, p, dl, dd, ul, ol,
 h1, h2, h3, h4, h5, h6,
-blockquote, figure, pre, hr {
+blockquote, figure, pre, hr{
   margin: 0;
 }
 
-ul, ol {
+ul, ol{
   padding: 0;
   list-style: none;
 }
 
 article, aside, details, figcaption,
 figure, footer, header, hgroup, main,
-nav, section, summary {
+nav, section, summary{
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6,
-b, strong {
+h1, h2, h3,h4, h5, h6,
+b, strong{
   font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6,
-small, big {
+h1, h2, h3, h4, h5, h6, 
+small, big{
   font-size: 100%;
 }
 
-em, i, address, dfn {
+em, i, address, dfn{
   font-style: normal;
 }
 
-sub, sup {
+sub,sup{
   vertical-align: baseline;
   font-size: 100%;
 }
 
-q {
+q{
   quotes: '' '';
 }
 
-img {
+img{
   border: none;
 }
 
-th {
+//===============================
+// Tables
+//===============================
+
+th{
   padding: 0;
   font-weight: 400;
 }
 
-table {
+table{
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+//===============================
+// Forms
+//===============================
+
 button,
-input[type="button"] {
+input[type="button"]{
   padding: 0;
   display: inline-block;
 }
@@ -85,27 +93,6 @@ button,
 select,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"]{
   cursor: pointer;
 }
-
-/* Base **********************/
-* {
-  box-sizing: border-box;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  background: #fff;
-}
-
-a {
-  color: inherit;
-  outline: none;
-}
-
-/* Fonts *********************/

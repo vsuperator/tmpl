@@ -1,0 +1,18 @@
+// Base styles
+*{
+  box-sizing: border-box;
+}
+
+html{
+  position: relative;
+  min-height: 100%;
+}
+
+body{
+  background: #fff;
+}
+
+a {
+  color: inherit;
+  outline: none;
+}
