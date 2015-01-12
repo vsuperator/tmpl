@@ -8,6 +8,8 @@ var gulp = require('gulp'),
     prefix = require('gulp-autoprefixer'),
     minify = require('gulp-minify-css'),
     plumber = require('gulp-plumber'),
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
     connect = require('gulp-connect');
 
 // Start the server Port:8080
@@ -29,7 +31,10 @@ gulp.task('css', function() {
     	.pipe(prefix({
     		browsers: ['last 3 version', '> 1%', 'ie 8', 'ie 9', 'Opera 12.1']
     	}))
-    	.pipe(minify({keepBreaks:true}))
+    	.pipe(minify({
+            keepBreaks:true,
+            suffix: '.min'
+        }))
     	.pipe(gulp.dest('../public/css'))
     	.pipe(connect.reload())
     	.pipe(notify('Css compiled'));
@@ -48,9 +53,23 @@ gulp.task('html', function() {
         .pipe(notify('HTML compiled'));
 })
 
+// Concatanation js scripts
+
+gulp.task('js', function() {
+    gulp.src('../_dev/_js/*.js')
+        .pipe(plumber({errorHandler: notify.onError("Error: JS")}))
+        .pipe(concat('main.js', {newLine: ';'}))
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(gulp.dest('../public/js/'))
+        .pipe(connect.reload())
+        .pipe(notify("JS compiled"));
+})
+
 gulp.task('watch', function() {
     gulp.watch('../_dev/_styles/**/*.scss', ['css']);
-	gulp.watch('../_dev/_makeups/**/*.jade', ['html']);
+    gulp.watch('../_dev/_makeups/**/*.jade', ['html']);
+	gulp.watch('../_dev/_js/*.js', ['js']);
 })
 
 gulp.task('default', ['connect', 'watch']);
