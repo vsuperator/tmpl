@@ -25,7 +25,7 @@ gulp.task('connect', function() {
 // Compile scss to css
 
 gulp.task('css', function() {
-    gulp.src('../_dev/_styles/*.scss')
+    gulp.src('../dev/sass/*.scss')
     	.pipe(plumber({errorHandler: notify.onError("Error: CSS")}))
     	.pipe(sass())
     	.pipe(prefix({
@@ -43,7 +43,7 @@ gulp.task('css', function() {
 // Compile Jade to HTML
 
 gulp.task('html', function() {
-    gulp.src('../_dev/_makeups/*.jade')
+    gulp.src('../dev/jade/*.jade')
         .pipe(plumber({errorHandler: notify.onError("Error: HTML")}))
         .pipe(jade({
             pretty: true
@@ -56,7 +56,7 @@ gulp.task('html', function() {
 // Concatanation js scripts
 
 gulp.task('js', function() {
-    gulp.src('../_dev/_js/*.js')
+    gulp.src('../dev/js/*.js')
         .pipe(plumber({errorHandler: notify.onError("Error: JS")}))
         .pipe(concat('main.js', {newLine: ';'}))
         .pipe(jshint())
@@ -67,9 +67,9 @@ gulp.task('js', function() {
 })
 
 gulp.task('watch', function() {
-    gulp.watch('../_dev/_styles/**/*.scss', ['css']);
-    gulp.watch('../_dev/_makeups/**/*.jade', ['html']);
-	gulp.watch('../_dev/_js/*.js', ['js']);
+    gulp.watch('../dev/sass/**/*.scss', ['css']);
+    gulp.watch('../dev/jade/**/*.jade', ['html']);
+	gulp.watch('../dev/js/*.js', ['js']);
 })
 
 gulp.task('default', ['connect', 'watch']);
